@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'class' => 'yii\db\Connection',
+    'class' => 'yii\db\Connectionfgdft',
     'dsn' => 'mysql:host=localhost;dbname=examshop',
     'username' => 'root',
     'password' => '',
