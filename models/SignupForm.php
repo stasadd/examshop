@@ -88,7 +88,7 @@ class SignupForm extends Model
     {
         if ($this->_user ===false)
         {
-            $this->_user = User::findByUsername($this->username);
+            $this->_user = Customers::findByUsername($this->username);
             if ($this->_user === null)
                 $this->_user = new User();
         }

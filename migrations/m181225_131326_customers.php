@@ -26,6 +26,19 @@ class m181225_131326_customers extends Migration
             'created_at'=>$this->timestamp()->defaultExpression('CURRENT_TIMESTAMP'),
             'updated_at'=>$this->timestamp()->defaultExpression('CURRENT_TIMESTAMP'),
         ],$tableOptions);
+        if ($this->db->driverName ==='mysql' )
+            $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=INNODB';
+        $this->createTable('{{%customers_temp}}',[
+            'id'=>Schema::TYPE_PK,//id -авто інкримент з primary key
+            'username'=>$this->string(32)->notNull(),
+            'auth_key'=>$this->string(32)->notNull(),
+            'password_hash'=>$this->string()->notNull(),
+            'password_reset_token'=>$this->string()->notNull()->unique(),
+            'email'=>$this->string(255)->notNull()->unique(),
+            'status'=>$this->integer()->notNull()->defaultValue(1),//1- не підтверджено
+            'created_at'=>$this->timestamp()->defaultExpression('CURRENT_TIMESTAMP'),
+            'updated_at'=>$this->timestamp()->defaultExpression('CURRENT_TIMESTAMP'),
+        ],$tableOptions);
 
     }
 
@@ -36,7 +49,7 @@ class m181225_131326_customers extends Migration
     {
 
         $this->dropTable('{{%customers}}');
-
+        $this->dropTable('{{%customers_temp}}');
         echo "m181211_165930_posts cannot be reverted.\n";
 
         return true;

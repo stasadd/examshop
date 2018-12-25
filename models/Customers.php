@@ -20,6 +20,7 @@ use Yii;
 class Customers extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 {
 
+
     public static  function  findByUsername($username)
     {
             $user = self::find()->where(["username"=>$username])->one();
