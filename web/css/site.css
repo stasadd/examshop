@@ -113,3 +113,11 @@ a.desc:after {
 .nav > li > form > button.logout:focus {
     outline: none;
 }
+.cart a:before{
+    content: "";
+    display: block;
+    width: 20px;
+    height: 20px;
+    background: url("/images/shopping-cart.svg");
+    background-size: cover;
+}

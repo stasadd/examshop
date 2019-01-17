@@ -65,6 +65,16 @@ class SiteController extends Controller
     }
 
     /**
+     * Displays homepage.
+     *
+     * @return string
+     */
+    public function actionCart()
+    {
+        return $this->render('cart');
+    }
+
+    /**
      * Login action.
      *
      * @return Response|string
@@ -121,8 +131,14 @@ class SiteController extends Controller
      *
      * @return string
      */
-    public function actionAbout()
+    public function actionAbout($id='')
     {
         return $this->render('about');
+    }
+
+    public function actionAjax()
+    {
+
+        return "answer ".Yii::$app->request->post()['id'];
     }
 }
