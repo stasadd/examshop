@@ -5,6 +5,36 @@
 h2{
 	margin-top: 10px;
 }
+.menu_list{
+	position: absolute;
+	top: 0;
+	padding: 0;
+	margin: 0;
+	list-style: none;
+	border: 1px solid rgb(128, 128, 128);
+	margin:1px;
+	box-shadow: 0 0 10px rgb(128, 128, 128);
+	box-shadow: 0 0 10px rgb(128, 128, 128) inset;
+	z-index: 10;
+	background: #fff;
+}
+.menu_item{
+	min-height: 40px;
+	padding: 10px;
+	display: inline-block;
+	width: 100%;
+	height: 30px;
+}
+.menu_item>a{
+	text-decoration: none;
+	color: rgb(128, 128, 128);
+	opacity: 0.8;
+	font-size: 14px;
+}
+.menu_item>a:hover{
+	opacity: 1;
+	font-size: 16px;
+}
 .clear-padding{
 	padding: 0;
 }
@@ -20,7 +50,7 @@ h2{
 	max-height: 125px;
 }
 .tab-name{
-	font-size: 10px;
+	font-size: 1.2em;
 	color: blue;
 	line-height: 10px;
 	font-family: Arial;
@@ -44,7 +74,7 @@ h2{
 .cat-img{
 	display: block;
 	margin:0 auto;
-	max-height: 170px;
+	height: 150px;
 }
 .marginv-10px{
 	margin: 10px 0; 
@@ -164,6 +194,29 @@ h2{
 	font-weight: 400;
 	text-shadow: none;
 }
+.curt_img{
+	height: 100px;
+	margin: 10px auto;
+	display: block;
+}
+.curt_product_name,.curt_product_price{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100px;
+	font-weight: 700;
+	font-size: 26px;	
+	text-align: center;
+}
+.curt_product_price{
+	color: rgb(	208, 34, 34);
+}
+.curt-btns{
+	height: 100px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
 .sticky-info p a{
 	border: none;
 	border-bottom: 1px dashed #fff;
@@ -220,12 +273,22 @@ h2{
     border-bottom: 1px dashed #fff;
     margin: 0;
 }
+
+.prod-img img {
+	margin: 0 auto;
+}
+.prod-img-inner {
+	height: 200px !important;
+}
 @media(max-width: 1240px){
 	.tab-img{
 		max-height: 85px;
 	}
+	.curt_img{
+		margin: 0 auto;
+	}
 }
-@media(max-width: 786px){
+@media(max-width: 767px){
 	.footer-links li{
 	    border-right: 0px;
 	}
@@ -235,5 +298,26 @@ h2{
 	}
 	.rewiev{
 		width: 100%;
+	}
+	.curt_product_price,.curt-btns{
+		height: 40px;
+	}
+	.menu_list{
+		position: relative;
+		width: calc(100% - 2px);
+		text-align: center;
+	}
+	.menu_item{
+		width: auto;
+		display: inline-block;
+	}
+	.menu_item>a>span{
+		display: none;
+	}
+	.menu_item>a{
+		font-weight: bold;
+	}
+	.menu_item>a:hover{
+		font-size: 14px;
 	}
 }

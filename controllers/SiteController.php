@@ -2,7 +2,9 @@
 
 namespace app\controllers;
 
+use app\models\Categories;
 use Yii;
+use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\Response;
@@ -61,7 +63,15 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $dataProvider = new ActiveDataProvider([
+            'query' => Categories::find(),
+        ]);
+
+        return $this->render('index', [
+            'dataProvider' => $dataProvider,
+        ]);
+
+        //return $this->render('index');
     }
 
     /**
@@ -136,9 +146,9 @@ class SiteController extends Controller
         return $this->render('about');
     }
 
+
     public function actionAjax()
     {
-
         return "answer ".Yii::$app->request->post()['id'];
     }
 }

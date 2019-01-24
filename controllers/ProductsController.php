@@ -2,12 +2,16 @@
 
 namespace app\controllers;
 
+use app\models\Categories;
+use app\models\Reviews;
+use PHPUnit\Util\Json;
 use Yii;
 use app\models\Products;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\ArrayHelper;
 
 /**
  * ProductsController implements the CRUD actions for Products model.
@@ -65,6 +69,8 @@ class ProductsController extends Controller
     public function actionCreate()
     {
         $model = new Products();
+        $categories = Categories::find()->all();
+        $cat_array=ArrayHelper::map($categories,'id','category');
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -72,6 +78,7 @@ class ProductsController extends Controller
 
         return $this->render('create', [
             'model' => $model,
+            'categories'=>$cat_array
         ]);
     }
 
@@ -130,5 +137,28 @@ class ProductsController extends Controller
         return $this->render('prod', [
             'model' => $this->findModel($id),
         ]);
+    }
+
+    public function actionMakereview()
+    {
+        $review = new Reviews();
+        $review->name = Yii::$app->request->post()['username'];
+        $review->text = Yii::$app->request->post()['userreview'];
+        $review->product_id = Yii::$app->request->post()['id'];
+        $review->save();
+
+        $arr = [
+            'name' => $review->name,
+            'text' => $review->text
+        ];
+
+        return json_encode($arr);
+    }
+
+    public function actionPutintocart()
+    {
+
+        //todo:: добавлення в корзину
+        return 'Success';
     }
 }

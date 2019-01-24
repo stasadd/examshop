@@ -130,10 +130,5 @@ class CategoriesController extends Controller
         return $this->render('category', [
             'model' => $this->findModel($id)
         ]);
-
-//        return $this->render('category', [
-//            'model' => $this->findModel($id),
-//        ]);
     }
-
 }

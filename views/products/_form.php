@@ -22,6 +22,10 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'updated_at')->textInput() ?>
 
+    <?= $form->field($model,'categories')->dropDownList($categories,['multiple'=>'multiple']) ?>
+
+    <?= $form->field($model,'images')->fileInput(['required'=>'required']); ?>
+
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
     </div>
