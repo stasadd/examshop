@@ -9,6 +9,8 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
+use yii\data\ActiveDataProvider;
+use app\models\Categories;
 
 AppAsset::register($this);
 ?>
@@ -29,30 +31,50 @@ AppAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => Yii::$app->name,
+        'brandLabel' => "Examshop", //Yii::$app->name
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
     ]);
+
+    //отримання категорій та їх id для вивода в меню
+    $dataProvider = new ActiveDataProvider([
+        'query' => Categories::find(),
+    ]);
+    $categories = [];
+    $index = 0;
+    foreach ($dataProvider->models as $category) {
+        $categories[$index]['label'] = $category->category;
+        $categories[$index]['url'] = ['/categories/category?id='.$category->id];
+        $index++;
+    }
+
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
-            ['label' => 'Home', 'url' => ['/site/index']],
-            ['label' => 'About', 'url' => ['/site/about']],
-            ['label' => 'Contact', 'url' => ['/site/contact']],
+            [
+                'label' => 'Категорії',
+                'items' => $categories
+            ],
             Yii::$app->user->isGuest ? (
-                ['label' => 'Login', 'url' => ['/site/login']]
+                ['label' => 'Зареєструватися', 'url' => ['/site/sign-up']]
+            ) : (
+                ['label' => 'User page', 'url' => ['/site/user-page']]
+            ),
+            Yii::$app->user->isGuest ? (
+                ['label' => 'Увійти', 'url' => ['/site/login']]
             ) : (
                 '<li>'
                 . Html::beginForm(['/site/logout'], 'post')
                 . Html::submitButton(
-                    'Logout (' . Yii::$app->user->identity->username . ')',
+                    'Вийти (' . Yii::$app->user->identity->username . ')',
                     ['class' => 'btn btn-link logout']
                 )
                 . Html::endForm()
                 . '</li>'
-            )
+            ),
+            ['label' => '', 'url' => ['/site/cart'],'options'=>['class'=>'cart']]
         ],
     ]);
     NavBar::end();
